@@ -4,6 +4,7 @@ def show_menu():
     print("Menu:")
     print("Enter list to list all movies")
     print("Enter search to search movies by name")
+    print("Enter cast to search movies by cast")
     print("Enter q to Quit")
 
 def list_all_movies(movies):
@@ -18,6 +19,16 @@ def search_movies_by_name(movies, query):
     if results:
         for movie_name in results:
             print(movie_name)
+    else:
+        print("No movies were found.")
+
+def search_movies_by_cast(movies, query):
+    print(f"Searching for movies with '{query}' in the cast:")
+    results = movies.search_movies_by_cast(query)
+    if results:
+        for movie_name, cast in results:
+            print(movie_name)
+            print(cast)
     else:
         print("No movies were found.")
 
@@ -36,6 +47,9 @@ def main():
         elif choice == 'search':
             query = input("Enter a word to search movies by name: ").strip()
             search_movies_by_name(movies, query)
+        elif choice == 'cast':
+            query = input("Enter a word to search movies by cast: ").strip()
+            search_movies_by_cast(movies, query)
         else:
             print("Invalid option. Please try again.")
 
